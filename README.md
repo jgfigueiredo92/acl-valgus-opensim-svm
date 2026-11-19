@@ -1,51 +1,55 @@
-# Knee valgus loading in cutting: OpenSim + linear SVM with subject-independent validation
+# O joelho sob carga: aprendizado de máquina e lesão do ligamento cruzado anterior no futebol
 
-Code, derived data and out-of-fold predictions for:
+Repositório de códigos, dados derivados e resultados da dissertação de mestrado de João Gabriel da Silva Figueiredo, apresentada ao Programa de Pós-Graduação em Modelagem e Simulação de Biossistemas (PPGMSB) da Universidade do Estado da Bahia (UNEB), Campus II, Alagoinhas.
 
-J. G. S. Figueiredo, E. N. Santana, J. R. A. Fontoura, J. A. S. Santana, D. B. C. Seabra, J. N. Silva. *Subject-Independent Validation of an Interpretable OpenSim-SVM Pipeline for Classifying Knee Valgus Loading in Cutting Maneuvers.* ACDSA 2027 (IEEE), Paper ID 879.
+Orientador: Prof. Dr. Erivelton Nonato de Santana. Coorientador: Prof. Dr. José Roberto de Araújo Fontoura.
 
-It also supports the master's dissertation *O joelho sob carga: aprendizado de máquina e lesão do ligamento cruzado anterior no futebol* (PPGMSB, State University of Bahia).
+## Objetivo
 
-## Input data (not redistributed)
+Estimar, por simulação neuromusculoesquelética no OpenSim, a sobrecarga do joelho durante a mudança de direção de 90° (v-cut) e avaliar se variáveis biomecânicas extraídas das simulações discriminam, por Máquinas de Vetores de Suporte (SVM) com kernel linear, ciclos de elevada sobrecarga em valgo em participantes não utilizados no treinamento.
 
-The raw data and scaled musculoskeletal models come from the open dataset of Nitschke et al.:
+## Dados de entrada (não redistribuídos)
 
-- M. Nitschke et al., *Optical motion capturing of change of direction motions reconstructed with inverse kinematics and dynamics and optimal control simulation*, Zenodo, 2022. doi: [10.5281/zenodo.6949012](https://doi.org/10.5281/zenodo.6949012)
-- M. Nitschke et al., *Change the direction: 3D optimal control simulation by directly tracking marker and ground reaction force data*, PeerJ 11:e14852, 2023. doi: [10.7717/peerj.14852](https://doi.org/10.7717/peerj.14852)
+Os dados experimentais e os modelos musculoesqueléticos escalonados pertencem à base pública de Nitschke et al.:
 
-Download the dataset from Zenodo and set the data path at the top of each script (see `scripts/config` notes below). The analysis uses participants 02 to 11, three 90° v-cut trials each (30 trials).
+- NITSCHKE, M. et al. *Optical motion capturing of change of direction motions reconstructed with inverse kinematics and dynamics and optimal control simulation*. Zenodo, 2022. DOI: [10.5281/zenodo.6949012](https://doi.org/10.5281/zenodo.6949012).
+- NITSCHKE, M. et al. Change the direction: 3D optimal control simulation by directly tracking marker and ground reaction force data. *PeerJ*, v. 11, e14852, 2023. DOI: [10.7717/peerj.14852](https://doi.org/10.7717/peerj.14852).
 
-## Pipeline
+Para reproduzir o processamento, faça o download da base no Zenodo e informe o caminho da pasta no início de cada script. Foram analisados os Participantes 02 a 11, com três ensaios de v-cut cada (30 ciclos).
 
-| Order | Script | What it does |
+## Sequência de execução
+
+| Ordem | Script | Função |
 |---|---|---|
-| 1 | `scripts/fase3_reprocessamento_opensim.py` | OpenSim 4.5 processing of the 30 trials: 15 Hz Butterworth filtering, inverse dynamics, static optimization and joint reaction analysis (right knee) |
-| 2 | `scripts/comparar_controle_P02_0122.py` | Control for trial P02/0123: compares P02/0122 processed with the normal window and with a start 50 ms earlier |
-| 3 | `scripts/fase4_extracao_desfecho_frontal.py` | Extracts the outcome (peak knee valgus moment during weight acceptance, N·m/kg) and the seven predictors |
-| 4 | `scripts/fase5_validacao_svm_desfecho_frontal.py` | Linear SVM (C = 1, balanced class weights), leave-one-subject-out validation, nested group 3-fold CV, cluster bootstrap (2000 replicates), weight vector |
-| 5 | `scripts/fase6_robustez_svm.py` | Sensitivity analyses: P75 recalculated within training folds, subject-level permutation test (1000), exclusion of participant 09, VIF, trial-wise vs subject-wise CV (50 repetitions) |
-| 6 | `scripts/fase7_robustez_contato.py` | Outcome extracted ignoring the first 10 ms after initial contact |
-| 7 | `scripts/figuras/` | Figure scripts (dissertation and paper) |
+| 1 | `scripts/fase3_reprocessamento_opensim.py` | Processamento dos 30 ensaios no OpenSim 4.5: filtragem Butterworth a 15 Hz, Dinâmica Inversa, Otimização Estática e Análise de Reação Articular do joelho direito |
+| 2 | `scripts/comparar_controle_P02_0122.py` | Controle do ensaio P02/0123: compara o P02/0122 processado com a janela normal e com início 50 ms antes |
+| 3 | `scripts/fase4_extracao_desfecho_frontal.py` | Extração do desfecho (pico do momento em valgo na aceitação de peso, em Nm/kg) e dos sete preditores |
+| 4 | `scripts/fase5_validacao_svm_desfecho_frontal.py` | SVM linear (C = 1, pesos de classe balanceados), validação LOSO, GroupKFold aninhado, bootstrap por conglomerado (2.000 réplicas) e vetor de pesos |
+| 5 | `scripts/fase6_robustez_svm.py` | Análises de sensibilidade: limiar P75 recalculado no treino, teste de permutação no nível do participante (1.000), exclusão do Participante 09, VIF e comparação entre validação por ciclo e por participante (50 repetições) |
+| 6 | `scripts/fase7_robustez_contato.py` | Extração do desfecho com exclusão dos primeiros 10 ms após o contato inicial |
+| 7 | `scripts/figuras/` | Geração das figuras da dissertação |
 
-## Repository contents
+## Conteúdo
 
-- `data/dataset_desfecho_frontal.csv`: outcome, class label and seven predictors per trial (30 trials).
-- `data/dataset_desfecho_frontal_ignora10ms.csv`: same, with the outcome extracted ignoring the first 10 ms after initial contact.
-- `data/validacao_ID_30.csv`, `data/fase3_validacao_ID.csv`: agreement between our inverse dynamics and the reference moments of the dataset authors (RMSE and Pearson r per trial).
-- `results/fase5_predicoes_oof.csv`: out-of-fold LOSO predictions (participant, trial, label, decision score, predicted class).
-- `results/fase5_pesos.csv`: SVM weight vector.
-- `results/*.txt`: printed outputs of phases 3, 5, 6 and 7.
-- `results/figures/`: figures of the dissertation and the paper.
-- `opensim_outputs/`: inverse dynamics, static optimization and joint reaction results per trial (optional, see note).
+- `data/dataset_desfecho_frontal.csv`: desfecho, rótulo e sete preditores por ciclo (30 ciclos).
+- `data/dataset_desfecho_frontal_ignora10ms.csv`: idem, com o desfecho extraído sem os primeiros 10 ms após o contato.
+- `data/validacao_ID_30.csv` e `data/fase3_validacao_ID.csv`: concordância entre a Dinâmica Inversa deste estudo e os momentos de referência dos autores da base (RMSE e r de Pearson por ensaio).
+- `results/fase5_predicoes_oof.csv`: predições fora da amostra do LOSO (participante, ensaio, rótulo, escore de decisão e classe prevista).
+- `results/fase5_pesos.csv`: vetor de pesos do SVM.
+- `results/*.txt`: saídas das fases 3, 5, 6 e 7, que originam os valores relatados na dissertação.
+- `results/figures/`: figuras da dissertação.
+- `opensim_outputs/`: resultados da Dinâmica Inversa, da Otimização Estática e da Análise de Reação Articular por ensaio (opcional).
 
-## Requirements
+## Requisitos
 
-Python 3 with the packages in `requirements.txt`, and OpenSim 4.5 (command-line tools) for step 1. Steps 3 to 7 run without OpenSim once the step 1 outputs exist.
+Python 3 com os pacotes de `requirements.txt` e OpenSim 4.5 (ferramentas de linha de comando) para a etapa 1. As etapas 3 a 7 dispensam o OpenSim depois que as saídas da etapa 1 existem.
 
-## Licenses
+## Licenças
 
-Code: MIT (see `LICENSE`). Derived data and results in `data/` and `results/`: CC BY 4.0. Please also cite the original dataset of Nitschke et al.
+Código: MIT (arquivo `LICENSE`). Dados derivados e resultados (`data/` e `results/`): CC BY 4.0. Ao utilizar este material, cite também a base original de Nitschke et al.
 
-## How to cite
+## Como citar
 
-See `CITATION.cff`, or cite the archived release: [REPOSITORY DOI].
+FIGUEIREDO, J. G. S. **O joelho sob carga: aprendizado de máquina e lesão do ligamento cruzado anterior no futebol**: códigos e dados. Zenodo, 2026. DOI: [DOI DO REPOSITÓRIO].
+
+Consulte também o arquivo `CITATION.cff`.
