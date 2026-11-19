@@ -1,0 +1,41 @@
+OpenSim: C:\OpenSim 4.5\bin\opensim-cmd.exe
+Trials a processar: 2 
+
+=== Participante 02 | trial 0122 ===
+    Janela: 0.6229 a 1.5600 s
+    Dinâmica Inversa...
+participante trial                momento  autores_min  autores_max  proprio_min  proprio_max  RMSE_Nm    r
+          02  0122    knee_angle_r_moment      -103.04       101.32       -42.69        99.71    10.35 0.96
+          02  0122 hip_adduction_r_moment      -100.30        49.14       -99.37        16.92     7.05 0.98
+          02  0122   hip_flexion_r_moment      -183.06        43.66       -77.09        42.45    19.39 0.87
+          02  0122   ankle_angle_r_moment      -183.79         2.97      -183.95         2.46     1.14 1.00
+    Força isométrica máxima x2 na SO e no JRA
+    SO e JRA iniciadas em 0.5729 s (50 ms antes da janela)
+    Otimização Estática...
+    Pico da reserva no joelho direito: 0.0 Nm | quadril direito: 0.0 Nm
+    Reserva / pico do momento (%): knee_angle_r 0.0% | hip_flexion_r 0.0% | hip_adduction_r 0.0% | ankle_angle_r 0.0%
+    Joint Reaction...
+    Candidatos (aceitação de peso): solicitação anterior máx -99 N | reação AP máx 3133 N | momento frontal -51.9 a 10.4 Nm
+    Pico AP (solicitação anterior): -98.8 N em 0.628 s | compressão 517.6 N
+
+=== Participante 02 | trial 0123 ===
+    Janela: 0.5543 a 1.5200 s
+    Dinâmica Inversa...
+participante trial                momento  autores_min  autores_max  proprio_min  proprio_max  RMSE_Nm    r
+          02  0123    knee_angle_r_moment       -66.16       115.86       -33.74       114.88     8.15 0.98
+          02  0123 hip_adduction_r_moment       -83.48        32.01       -81.17        31.21     4.92 0.99
+          02  0123   hip_flexion_r_moment      -126.05        40.50       -71.19        39.79    16.01 0.89
+          02  0123   ankle_angle_r_moment      -146.90         2.54      -146.05         2.51     0.85 1.00
+    Força isométrica máxima x2 na SO e no JRA
+    SO e JRA iniciadas em 0.5043 s (50 ms antes da janela)
+    Otimização Estática...
+    Pico da reserva no joelho direito: 0.0 Nm | quadril direito: 0.0 Nm
+    Reserva / pico do momento (%): knee_angle_r 0.0% | hip_flexion_r 0.0% | hip_adduction_r 0.0% | ankle_angle_r 0.0%
+    Joint Reaction...
+    Candidatos (aceitação de peso): solicitação anterior máx -127 N | reação AP máx 3976 N | momento frontal -43.9 a 15.4 Nm
+    Pico AP (solicitação anterior): -127.4 N em 0.560 s | compressão 334.7 N
+
+Dataset salvo: dataset_lesoes_svm_v2.xlsx (2 ciclos)
+Cisalhamento AP (N): mínimo -127 | mediana -113 | máximo -99
+
+Concluídos: 2 | Falhas: 0
