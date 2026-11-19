@@ -1,0 +1,127 @@
+
+==============================================================================
+MASSA CORPORAL POR ATLETA (modelo .osim escalonado)
+==============================================================================
+  Participante 02: 67.11 kg
+  Participante 03: 58.79 kg
+  Participante 04: 84.19 kg
+  Participante 05: 64.88 kg
+  Participante 06: 77.66 kg
+  Participante 07: 57.73 kg
+  Participante 08: 65.71 kg
+  Participante 09: 97.23 kg
+  Participante 10: 71.79 kg
+  Participante 11: 67.75 kg
+
+==============================================================================
+ESTRUTURA AMOSTRAL E ROTULAGEM
+==============================================================================
+Ciclos: 30 | Atletas: 10
+Limiar P75 do momento em valgo normalizado: 0.203 Nm/kg
+Classe 1 (elevada sobrecarga): 8 | Classe 0: 22
+ATENCAO: a Classe 1 nao tem 7 ciclos. Ajuste o texto da 2.1.6 (n da Classe 1 e da Classe 0) ao valor acima.
+
+Ciclos de Classe 1 por atleta:
+Participante  02  03  04  05  06  07  08  09  10  11
+classe_1       2   0   1   0   0   0   0   2   3   0
+ciclos         3   3   3   3   3   3   3   3   3   3
+Momento em valgo (Nm/kg): minimo -0.065 | mediana 0.114 | maximo 0.385
+
+==============================================================================
+1-2. LOSO COM MÉTRICAS ADICIONAIS E MATRIZ POR PARTIÇÃO (P75 global)
+==============================================================================
+atleta_teste  C1_treino  VP  FN  FP  VN
+          02          6   0   2   0   1
+          03          8   0   0   0   3
+          04          7   1   0   1   1
+          05          8   0   0   0   3
+          06          8   0   0   3   0
+          07          8   0   0   0   3
+          08          8   0   0   0   3
+          09          6   0   2   0   1
+          10          5   0   3   0   0
+          11          8   0   0   1   2
+
+Agregado (P75 da amostra inteira):
+  acuracia            : 0.600
+  acuracia_balanceada : 0.449
+  sensibilidade       : 0.125
+  especificidade      : 0.773
+  precisao            : 0.167
+  MCC                 : -0.113
+  AUC                 : 0.483
+  Linha de base (classe majoritária): 0.733 | acurácia balanceada de referência: 0.500
+
+==============================================================================
+3. LIMIAR P75 RECALCULADO NO TREINO DE CADA PARTIÇÃO (sem vazamento)
+==============================================================================
+atleta_teste  C1_treino  VP  FN  FP  VN
+          02          7   0   2   0   1
+          03          7   0   0   0   3
+          04          7   1   0   1   1
+          05          7   0   0   0   3
+          06          7   0   0   3   0
+          07          7   0   0   0   3
+          08          7   0   0   0   3
+          09          7   0   2   0   1
+          10          7   1   2   0   0
+          11          7   0   0   1   2
+
+Agregado (P75 do treino):
+  acuracia            : 0.633
+  acuracia_balanceada : 0.511
+  sensibilidade       : 0.250
+  especificidade      : 0.773
+  precisao            : 0.286
+  MCC                 : 0.024
+  AUC                 : 0.455
+
+==============================================================================
+4. TESTE DE PERMUTAÇÃO NO NÍVEL DO ATLETA (1000 permutações)
+==============================================================================
+AUC observada 0.483 | distribuição nula: mediana 0.460 [P2,5 0.068; P97,5 0.852] | p = 0.460
+Acurácia balanceada observada 0.449 | nula: mediana 0.460 | p = 0.532
+
+==============================================================================
+5. MULTICOLINEARIDADE DOS PREDITORES
+==============================================================================
+                              Angulo_Aducao_Quadril  Angulo_Flexao_Joelho  Angulo_Flexao_Quadril  Angulo_Rotacao_Quadril  Momento_Aducao_Quadril_Nm_kg  Cisalhamento_ML_N_kg  Compressao_Y_N_kg
+Angulo_Aducao_Quadril                          1.00                  0.30                  -0.01                    0.24                          0.35                 -0.19               0.27
+Angulo_Flexao_Joelho                           0.30                  1.00                  -0.30                    0.11                          0.16                  0.26              -0.11
+Angulo_Flexao_Quadril                         -0.01                 -0.30                   1.00                   -0.08                         -0.07                 -0.40               0.15
+Angulo_Rotacao_Quadril                         0.24                  0.11                  -0.08                    1.00                          0.26                 -0.25               0.07
+Momento_Aducao_Quadril_Nm_kg                   0.35                  0.16                  -0.07                    0.26                          1.00                 -0.70               0.23
+Cisalhamento_ML_N_kg                          -0.19                  0.26                  -0.40                   -0.25                         -0.70                  1.00              -0.03
+Compressao_Y_N_kg                              0.27                 -0.11                   0.15                    0.07                          0.23                 -0.03               1.00
+
+VIF:
+  Angulo_Aducao_Quadril         : 1.62
+  Angulo_Flexao_Joelho          : 2.25
+  Angulo_Flexao_Quadril         : 1.87
+  Angulo_Rotacao_Quadril        : 1.19
+  Momento_Aducao_Quadril_Nm_kg  : 4.79
+  Cisalhamento_ML_N_kg          : 5.87
+  Compressao_Y_N_kg             : 1.64
+
+==============================================================================
+6. SENSIBILIDADE: LOSO SEM O PARTICIPANTE 09
+==============================================================================
+
+Agregado sem o P09 (P75 recalculado nos 24 ciclos restantes):
+  acuracia            : 0.444
+  acuracia_balanceada : 0.346
+  sensibilidade       : 0.143
+  especificidade      : 0.550
+  precisao            : 0.100
+  MCC                 : -0.279
+  AUC                 : 0.386
+
+==============================================================================
+7. PSEUDORREPLICAÇÃO: VALIDAÇÃO POR CICLO x POR ATLETA (3 partições, 50 repetições)
+==============================================================================
+Por ciclo (atletas misturados entre treino e teste): AUC média 0.766 [P2,5 0.517; P97,5 0.905] | acurácia balanceada média 0.690
+Por atleta (independente do sujeito): AUC média 0.471 [P2,5 0.302; P97,5 0.641] | acurácia balanceada média 0.466
+
+==============================================================================
+CONCLUÍDO
+==============================================================================
