@@ -1,0 +1,6 @@
+# Substitua pelas versões instaladas no seu computador (comando: pip freeze)
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib

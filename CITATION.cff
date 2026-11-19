@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite it as below."
+title: "Knee valgus loading in cutting: OpenSim and linear SVM with subject-independent validation"
+version: 1.0.0
+license: MIT
+authors:
+  - family-names: Figueiredo
+    given-names: João Gabriel da Silva
+    orcid: "https://orcid.org/0009-0000-3343-7258"
+  - family-names: Santana
+    given-names: Erivelton Nonato de
+    orcid: "https://orcid.org/0000-0002-0801-2546"
+  - family-names: Fontoura
+    given-names: José Roberto de Araújo
+    orcid: "https://orcid.org/0000-0002-9703-835X"
+  - family-names: Santana
+    given-names: José Alfredo Sousa
+    orcid: "https://orcid.org/0000-0002-4303-795X"
+  - family-names: Seabra
+    given-names: David Bacelar Costa
+    orcid: "https://orcid.org/0009-0007-6270-8812"
+  - family-names: Silva
+    given-names: Jhonatas Novais
+    orcid: "https://orcid.org/0000-0003-0089-1993"
+references:
+  - type: dataset
+    title: "Optical motion capturing of change of direction motions reconstructed with inverse kinematics and dynamics and optimal control simulation"
+    authors:
+      - family-names: Nitschke
+        given-names: Marlies
+    doi: "10.5281/zenodo.6949012"
+    year: 2022
