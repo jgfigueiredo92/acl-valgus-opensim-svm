@@ -29,9 +29,14 @@ Download the dataset from Zenodo and set the data path at the top of each script
 
 ## Repository contents
 
-- `data/dataset_30.csv`: outcome, class label and seven predictors per trial.
-- `data/validacao_ID_30*.csv`: agreement between our inverse dynamics and the reference moments of the dataset authors (RMSE and Pearson r per trial).
-- `results/`: printed outputs of phases 5 to 7 and the out-of-fold LOSO predictions (participant, trial, label, decision score, predicted class).
+- `data/dataset_desfecho_frontal.csv`: outcome, class label and seven predictors per trial (30 trials).
+- `data/dataset_desfecho_frontal_ignora10ms.csv`: same, with the outcome extracted ignoring the first 10 ms after initial contact.
+- `data/validacao_ID_30.csv`, `data/fase3_validacao_ID.csv`: agreement between our inverse dynamics and the reference moments of the dataset authors (RMSE and Pearson r per trial).
+- `results/fase5_predicoes_oof.csv`: out-of-fold LOSO predictions (participant, trial, label, decision score, predicted class).
+- `results/fase5_pesos.csv`: SVM weight vector.
+- `results/*.txt`: printed outputs of phases 3, 5, 6 and 7.
+- `results/figures/`: figures of the dissertation and the paper.
+- `opensim_outputs/`: inverse dynamics, static optimization and joint reaction results per trial (optional, see note).
 
 ## Requirements
 
